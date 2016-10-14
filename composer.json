@@ -1,0 +1,13 @@
+{
+  "name": "Redis Demo Project",
+  "author": {
+    "name": "leiw",
+    "email": "leiwgz@gmail.com"
+  },
+  "require": {
+    "noahbuscher/macaw": "dev-master"
+  },
+  "autoload": {
+    "classmap": ["src/"]
+  }
+}
