@@ -22,7 +22,7 @@ class Product
         $products = $redisClient->get($allProductKey);
         if (!$products) {
             $products = $this->getProductsBySuperComplexSql();
-            $redisClient->setex($allProductKey, 60 * 60, $products); // 30s
+            $redisClient->setex($allProductKey, 60, $products);
         }
 
         return $products;
