@@ -1,3 +1,5 @@
 vendor/
 bin/
 .idea/
+composer.lock
+git-author-rewrite.sh
