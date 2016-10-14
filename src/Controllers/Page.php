@@ -17,6 +17,6 @@ class Page
      */
     public function getAllProducts()
     {
-        return Product::all();
+        return (new Product)->all();
     }
 }

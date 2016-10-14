@@ -2,6 +2,8 @@
 
 namespace RedisDemo\Models;
 
+use Predis\Client;
+
 /**
  * Class Product
  *
@@ -13,9 +15,25 @@ class Product
     /**
      * @return string
      */
-    public static function all()
+    public function all()
     {
-        $productsGetBySuperComplexSql = [
+        $redisClient = new Client;
+        $allProductKey = 'Demo.allProducts';
+        $products = $redisClient->get($allProductKey);
+        if (!$products) {
+            $products = $this->getProductsBySuperComplexSql();
+            $redisClient->setex($allProductKey, 60 * 60, $products); // 30s
+        }
+
+        return $products;
+    }
+
+    /**
+     * @return array
+     */
+    protected function getProductsBySuperComplexSql()
+    {
+        return json_encode([
             'p_1' => [
                 'name' => 'orange',
                 'price' => '2',
@@ -24,8 +42,6 @@ class Product
                 'name' => 'book',
                 'price' => '15',
             ],
-        ];
-
-        return json_encode($productsGetBySuperComplexSql);
+        ]);
     }
 }
